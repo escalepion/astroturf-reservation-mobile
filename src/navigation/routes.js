@@ -7,7 +7,7 @@ export const LoggedIn = StackNavigator({
     Index: { 
         screen: Index,
         navigationOptions: {
-            title: 'Anasayfa'
+            title: 'Sahalar'
         }
     }
     });

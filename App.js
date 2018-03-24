@@ -6,7 +6,6 @@ import { createRootNavigator } from './src/navigation/routes';
 
 import reducers from './src/reducers';
 
-import Index from './src/screens/Index';
 
 export default class App extends React.Component {
   render() {
