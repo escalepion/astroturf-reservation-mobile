@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
 
-const AreaItem = () => {
+const AreaItem = ({ item }) => {
+    console.log(item);
     const {
         itemContainer,
         thumbnailStyle,
@@ -19,14 +20,13 @@ const AreaItem = () => {
             <View style={itemContentContainer}>
                 <View style={itemContentGroup}>
                     <Text style={itemTitle}>Saha: </Text>
-                    <Text style={itemText}>Saha 1</Text>
-                </View>
-                <View style={itemContentGroup}>
-                    <Text style={itemTitle}>Boş Saat: </Text>
-                    <Text style={itemText}>-</Text>
+                    <Text style={itemText}>{item.areaName}</Text>
                 </View>
                 <View style={itemContentGroup}>
                     <Button title="Sahaya Git" onPress={() => {}} />
+                </View>
+                <View style={itemContentGroup}>
+                    <Button color='#D9534F' title="Sahayı Sil" onPress={() => {}} />
                 </View>
             </View>
         </View>

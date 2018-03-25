@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { createRootNavigator } from './src/navigation/routes';
 import reducers from './src/reducers';
 
+console.ignoredYellowBox = ['Setting a timer'];
 
 export default class App extends React.Component {
   componentWillMount() {
