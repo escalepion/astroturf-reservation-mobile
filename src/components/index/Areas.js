@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
+import MainContainer from '../common/MainContainer';
+import AreaItem from './AreaItem';
+
 class Areas extends Component {
     render() {
         return (
-            <View>
-                <Text>Areas component</Text>
-            </View>
+            <MainContainer>
+                <AreaItem />
+            </MainContainer>
         );
     }
 }
