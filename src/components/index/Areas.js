@@ -14,8 +14,10 @@ class Areas extends Component {
     }
     componentWillMount() {
         firebase.database().ref('areas').on('value', (snapshot) => {
-            const areaList = Object.keys(snapshot.val()).map((i) => { return { ...snapshot.val()[i], id: i }; });
-            this.setState({ areaList });
+            if (snapshot.val()) {
+                const areaList = Object.keys(snapshot.val()).map((i) => { return { ...snapshot.val()[i], id: i }; });
+                this.setState({ areaList });
+            }
         });
     }
     renderAreaList() {
