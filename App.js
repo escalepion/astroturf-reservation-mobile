@@ -2,9 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
-import { createRootNavigator } from './src/navigation/routes';
 import firebase from 'firebase';
 
+import { createRootNavigator } from './src/navigation/routes';
 import reducers from './src/reducers';
 
 
