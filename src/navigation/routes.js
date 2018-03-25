@@ -2,12 +2,19 @@ import { StackNavigator } from 'react-navigation';
 
 import Login from '../screens/Login';
 import Index from '../screens/Index';
+import AddArea from '../screens/AddArea';
 
 export const LoggedIn = StackNavigator({
     Index: { 
         screen: Index,
         navigationOptions: {
             title: 'Sahalar'
+        }
+    },
+    AddArea: { 
+        screen: AddArea,
+        navigationOptions: {
+            title: 'Saha Ekle'
         }
     }
     });

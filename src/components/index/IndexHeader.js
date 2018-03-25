@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { withNavigation } from 'react-navigation';
 
 import MainContainer from '../common/MainContainer';
 
-const IndexHeader = () => {
+const IndexHeader = (props) => {
     return (
         <MainContainer>
             <View style={styles.container}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => { props.navigation.navigate('AddArea'); }}>
                     <Icon
                         raised
                         name="add"
@@ -28,4 +29,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default IndexHeader;
+export default withNavigation(IndexHeader);
