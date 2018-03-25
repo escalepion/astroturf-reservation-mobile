@@ -8,7 +8,8 @@ export const LoggedIn = StackNavigator({
     Index: { 
         screen: Index,
         navigationOptions: {
-            title: 'Sahalar'
+            title: 'Sahalar',
+            headerLeft: null
         }
     },
     AddArea: { 

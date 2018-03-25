@@ -12,7 +12,7 @@ class AddArea extends Component {
     handleFormSubmit(values) {
         firebase.database().ref('areas')
         .push({ areaName: values.areaName })
-        .then(() => { this.props.navigation.navigate('Index'); });
+        .then(() => { this.props.navigation.replace('Index'); });
     }
     render() {
         return (

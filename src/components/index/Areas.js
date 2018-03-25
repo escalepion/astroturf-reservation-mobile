@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, FlatList } from 'react-native';
+import { Text, FlatList, View } from 'react-native';
 import firebase from 'firebase';
 
 import MainContainer from '../common/MainContainer';
@@ -42,7 +42,9 @@ class Areas extends Component {
         }
         return (
             <MainContainer>
-                {this.renderAreaList()}
+                <View>
+                    {this.renderAreaList()}
+                </View>
             </MainContainer>
         );
     }
