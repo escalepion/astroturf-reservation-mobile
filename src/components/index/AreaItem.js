@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
 
-const AreaItem = ({ item }) => {
+const AreaItem = ({ item, onDeleteAreaClick }) => {
     console.log(item);
     const {
         itemContainer,
@@ -26,7 +26,7 @@ const AreaItem = ({ item }) => {
                     <Button title="Sahaya Git" onPress={() => {}} />
                 </View>
                 <View style={itemContentGroup}>
-                    <Button color='#D9534F' title="Sahayı Sil" onPress={() => {}} />
+                    <Button color='#D9534F' title="Sahayı Sil" onPress={onDeleteAreaClick} />
                 </View>
             </View>
         </View>

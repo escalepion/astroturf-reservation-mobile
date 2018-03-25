@@ -15,16 +15,23 @@ class Areas extends Component {
     componentWillMount() {
         firebase.database().ref('areas').on('value', (snapshot) => {
             if (snapshot.val()) {
-                const areaList = Object.keys(snapshot.val()).map((i) => { return { ...snapshot.val()[i], id: i }; });
+                let areaList = [];
+                Object.keys(snapshot.val()).forEach((i) => { areaList.push({ ...snapshot.val()[i], id: i }); });
                 this.setState({ areaList });
+            } else {
+                this.setState({ areaList: [] });
             }
         });
+    }
+    onDeleteAreaClick(id) {
+        firebase.database().ref(`areas/${id}`)
+        .remove();
     }
     renderAreaList() {
         return (
             <FlatList
                 data={this.state.areaList}
-                renderItem={({ item }) => <AreaItem item={item} />}
+                renderItem={({ item }) => <AreaItem onDeleteAreaClick={() => this.onDeleteAreaClick(item.id)} item={item} />}
                 keyExtractor={item => item.id}
             />
         );
