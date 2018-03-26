@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
-const AreaItem = ({ item, onDeleteAreaClick }) => {
-    console.log(item);
+const AreaItem = ({ item, onDeleteAreaClick, navigation }) => {
     const {
         itemContainer,
         thumbnailStyle,
@@ -23,7 +23,7 @@ const AreaItem = ({ item, onDeleteAreaClick }) => {
                     <Text style={itemText}>{item.areaName}</Text>
                 </View>
                 <View style={itemContentGroup}>
-                    <Button title="Sahaya Git" onPress={() => {}} />
+                    <Button title="Sahaya Git" onPress={() => { navigation.navigate('AreaDetail'); }} />
                 </View>
                 <View style={itemContentGroup}>
                     <Button color='#D9534F' title="Sahayı Sil" onPress={onDeleteAreaClick} />
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AreaItem;
+export default withNavigation(AreaItem);

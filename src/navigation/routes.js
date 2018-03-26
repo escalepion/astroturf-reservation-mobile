@@ -3,6 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import Login from '../screens/Login';
 import Index from '../screens/Index';
 import AddArea from '../screens/AddArea';
+import AreaDetail from '../screens/AreaDetail';
 
 export const LoggedIn = StackNavigator({
     Index: { 
@@ -16,6 +17,12 @@ export const LoggedIn = StackNavigator({
         screen: AddArea,
         navigationOptions: {
             title: 'Saha Ekle'
+        }
+    },
+    AreaDetail: { 
+        screen: AreaDetail,
+        navigationOptions: {
+            title: 'Saha reservasyonlar'
         }
     }
     });
