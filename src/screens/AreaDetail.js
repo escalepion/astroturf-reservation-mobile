@@ -1,9 +1,10 @@
 import React from 'react';
-import { Text } from 'react-native';
+
+import Hours from '../components/areaDetail/Hours';
 
 const AreaDetail = () => {
     return (
-        <Text>Area detail page</Text>
+        <Hours />
     );
 };
 
