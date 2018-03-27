@@ -1,10 +1,15 @@
 import React from 'react';
+import { View } from 'react-native';
 
 import Hours from '../components/areaDetail/Hours';
+import DatePicker from '../components/areaDetail/DatePicker';
 
 const AreaDetail = () => {
     return (
-        <Hours />
+        <View>
+            <DatePicker />
+            <Hours />
+        </View>
     );
 };
 

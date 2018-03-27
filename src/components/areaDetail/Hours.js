@@ -4,10 +4,6 @@ import { FlatList, Text, View } from 'react-native';
 import { HoursMap } from '../../data/Hours';
 
 class Hours extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { date: '2016-05-15' };
-    }
     renderHours() {
         const arr = Array(24).fill().map((e, i) => i + 1);
         return (
