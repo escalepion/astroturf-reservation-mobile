@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 
 import { HoursMap } from '../../data/Hours';
 
+import HourItem from './HourItem';
+import AddReservationModal from './AddReservationModal';
+
 class Hours extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { modalVisible: false };
+    }
+    onAddPress() {
+        this.setState({ modalVisible: true });
+    }
+    onModalPress() {
+        this.setModalVisible(false);
+    }
     renderHours() {
         const arr = Array(24).fill().map((e, i) => i + 1);
         return (
             <FlatList
                 data={arr}
-                renderItem={({ item, index }) => <Text>{`${HoursMap[index]} - ${HoursMap[index + 1]}`}</Text>}
+                renderItem={({ item, index }) => <HourItem onAddPress={this.onAddPress.bind(this)} item={item} index={index} HoursMap={HoursMap} />}
                 keyExtractor={(item, index) => index}
             />
         );
@@ -18,6 +31,10 @@ class Hours extends Component {
         return (
             <View>
                 {this.renderHours()}
+                <AddReservationModal 
+                onModalPress={this.onModalPress.bind(this)} 
+                visible={this.state.modalVisible}
+                />
             </View>
         );
     }

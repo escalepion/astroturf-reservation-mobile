@@ -44,14 +44,17 @@ class DatePicker extends Component {
             pageSize: 10,
             pageOffset: 0,
         });
-        if (contacts.total > 0) {
-            Alert.alert(
-                'Your first contact is...',
-                `Name: ${contacts.data[0].name}\n` +
-                `Phone numbers: ${JSON.stringify(contacts.data[0].phoneNumbers)}\n` +
-                `Emails: ${JSON.stringify(contacts.data[0].emails)}`
-            );
-        }
+        // if (contacts.total > 0) {
+        //     Alert.alert(
+        //         'Your first contact is...',
+        //         `Name: ${contacts.data[0].name}\n` +
+        //         `Phone numbers: ${JSON.stringify(contacts.data[0].phoneNumbers)}\n` +
+        //         `Emails: ${JSON.stringify(contacts.data[0].emails)}`
+        //     );
+        // }
+    }
+    onModalPress() {
+        this.setModalVisible(false);
     }
     render() {
         return (
