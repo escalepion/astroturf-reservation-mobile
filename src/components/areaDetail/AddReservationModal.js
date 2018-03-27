@@ -3,7 +3,7 @@ import { Modal, Text, TouchableWithoutFeedback, View, StyleSheet, TouchableOpaci
 
 class AddReservationModal extends Component {
     render() {
-        const { visible, closeModal } = this.props;
+        const { visible, closeModal, onAddConfirm } = this.props;
         return (
             <Modal
                 animationType={'slide'}
@@ -13,7 +13,7 @@ class AddReservationModal extends Component {
             >
                 <TouchableWithoutFeedback onPress={closeModal}>
                     <View style={styles.container}>
-                        <TouchableOpacity><Text>Ekle</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={onAddConfirm}><Text>Ekle</Text></TouchableOpacity>
                         <TouchableOpacity onPress={closeModal}><Text>İptal</Text></TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>
