@@ -14,8 +14,8 @@ class Hours extends Component {
     onAddPress() {
         this.setState({ modalVisible: true });
     }
-    onModalPress() {
-        this.setModalVisible(false);
+    closeModal() {
+        this.setState({ modalVisible: false });
     }
     renderHours() {
         const arr = Array(24).fill().map((e, i) => i + 1);
@@ -32,7 +32,7 @@ class Hours extends Component {
             <View>
                 {this.renderHours()}
                 <AddReservationModal 
-                onModalPress={this.onModalPress.bind(this)} 
+                closeModal={this.closeModal.bind(this)} 
                 visible={this.state.modalVisible}
                 />
             </View>
