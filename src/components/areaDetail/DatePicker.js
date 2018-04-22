@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, Alert } from 'react-native';
-import Expo from 'expo';
+import { TouchableOpacity, Text } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
@@ -14,9 +13,6 @@ class DatePicker extends Component {
         super(props);
         this.state = { isDateTimePickerVisible: false };
     }
-    componentDidMount() {
-        this.showFirstContactAsync();
-    }
     onPreviousDateClick() {
         this.props.changeDate(this.props.selectedDate.subtract(1, 'days'));
     }
@@ -29,30 +25,6 @@ class DatePicker extends Component {
     };
     hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
     showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
-    async showFirstContactAsync() {
-        // Ask for permission to query contacts.
-        const permission = await Expo.Permissions.askAsync(Expo.Permissions.CONTACTS);
-        if (permission.status !== 'granted') {
-            // Permission was denied...
-            return;
-        }
-        const contacts = await Expo.Contacts.getContactsAsync({
-            fields: [
-                Expo.Contacts.PHONE_NUMBERS,
-                Expo.Contacts.EMAILS,
-            ],
-            pageSize: 10,
-            pageOffset: 0,
-        });
-        // if (contacts.total > 0) {
-        //     Alert.alert(
-        //         'Your first contact is...',
-        //         `Name: ${contacts.data[0].name}\n` +
-        //         `Phone numbers: ${JSON.stringify(contacts.data[0].phoneNumbers)}\n` +
-        //         `Emails: ${JSON.stringify(contacts.data[0].emails)}`
-        //     );
-        // }
-    }
     onModalPress() {
         this.setModalVisible(false);
     }
