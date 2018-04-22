@@ -40,7 +40,7 @@ class Hours extends Component {
         return (
             <View>
                 {this.renderHours()}
-                {this.state.selectedHour ? <AddReservationModal
+                {this.state.selectedHour >=0 ? <AddReservationModal
                     closeModal={this.closeModal.bind(this)}
                     visible={this.state.selectedHour && true}
                     onAddConfirm={this.onAddConfirm.bind(this)}
