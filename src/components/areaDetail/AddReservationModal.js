@@ -9,9 +9,15 @@ import {
 } from 'react-native';
 
 import ModalContactList from './ModalContactList';
-
+import BlockCaption from '../common/BlockCaption';
 
 class AddReservationModal extends Component {
+    constructor() {
+        super();
+        this.state = {
+            selectedPerson : undefined
+        }
+    }
     render() {
         const { visible, closeModal, onAddConfirm } = this.props;
         return (
@@ -21,15 +27,16 @@ class AddReservationModal extends Component {
                 visible={visible}
                 onRequestClose={() => { }}
             >
-                <TouchableWithoutFeedback onPress={closeModal}>
+                {/*<TouchableWithoutFeedback onPress={closeModal}>*/}
                     <View style={styles.container}>
                         <View style={styles.contentContainer}>
+                            <BlockCaption>{this.state.selectedPerson ? this.state.selectedPerson : 'Kişi seçiniz'}</BlockCaption>
                             <ModalContactList/>
                             <TouchableOpacity onPress={onAddConfirm}><Text>Ekle</Text></TouchableOpacity>
                             <TouchableOpacity onPress={closeModal}><Text>İptal</Text></TouchableOpacity>
                         </View>
-                        </View>
-                </TouchableWithoutFeedback>
+                    </View>
+                {/*</TouchableWithoutFeedback>*/}
             </Modal>
         );
     }
@@ -43,7 +50,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     contentContainer: {
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        alignItems : 'center'
     }
 });
 

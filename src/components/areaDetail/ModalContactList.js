@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 
 
 class ModalContactList extends Component {
@@ -24,8 +24,8 @@ class ModalContactList extends Component {
                 Expo.Contacts.PHONE_NUMBERS,
                 Expo.Contacts.EMAILS,
             ],
-            pageSize: 10,
-            pageOffset: 0,
+            // pageSize: 10,
+            // pageOffset: 0,
         });
         this.setState({ contactList });
         // if (contacts.total > 0) {
@@ -42,10 +42,11 @@ class ModalContactList extends Component {
         if(this.state.contactList && this.state.contactList.data.length === 0) {
             return <Text>Henüz kişi eklenmemiş</Text>;
         }else if(this.state.contactList && this.state.contactList.data.length > 0) {
+            console.log(this.state.contactList);
             return (
                 <FlatList
                     data={this.state.contactList.data}
-                    renderItem={({ item, index }) => <Text>{item.name}</Text>}
+                    renderItem={({ item, index }) => <Text>{item.name && item.name} {item.phoneNumbers && item.phoneNumbers[0].number}</Text>}
                     keyExtractor={(item, index) => index}
                 />
             );
@@ -54,12 +55,20 @@ class ModalContactList extends Component {
         }
     }
     render() {
+        const {container} = styles;
         return (
-            <View>
+            <View style={styles.container}>
                 {this.mapContactList()}
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        minHeight: 50,
+        maxHeight: 150
+    }
+});
 
 export default ModalContactList;
