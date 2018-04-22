@@ -10,6 +10,8 @@ import {
 
 import ModalContactList from './ModalContactList';
 import BlockCaption from '../common/BlockCaption';
+import RowCenterContainer from '../common/RowCenterContainer';
+import {StandartButton} from '../common/Buttons';
 
 class AddReservationModal extends Component {
     constructor() {
@@ -32,8 +34,10 @@ class AddReservationModal extends Component {
                         <View style={styles.contentContainer}>
                             <BlockCaption>{this.state.selectedPerson ? this.state.selectedPerson : 'Kişi seçiniz'}</BlockCaption>
                             <ModalContactList/>
-                            <TouchableOpacity onPress={onAddConfirm}><Text>Ekle</Text></TouchableOpacity>
-                            <TouchableOpacity onPress={closeModal}><Text>İptal</Text></TouchableOpacity>
+                            <RowCenterContainer>
+                                <StandartButton type='confirm' onPress={onAddConfirm}><Text>Ekle</Text></StandartButton>
+                                <StandartButton type='cancel' onPress={closeModal}><Text>İptal</Text></StandartButton>
+                            </RowCenterContainer>  
                         </View>
                     </View>
                 {/*</TouchableWithoutFeedback>*/}

@@ -2,16 +2,22 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 const BlockCaption = (props) => {
+    const {container, containerText} = styles;
     return (
-        <View>
-            <Text>{props.children}</Text> 
+        <View style={container}>
+            <Text style={containerText}>{props.children}</Text> 
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container : {
-
+        paddingTop: 20,
+        paddingBottom: 20,
+    },
+    containerText: {
+        fontSize: 25,
+        fontWeight: 'bold'
     }
 });
 

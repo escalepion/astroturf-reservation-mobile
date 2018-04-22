@@ -1,5 +1,10 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+
+const ColoredButtonText = (props) => {
+    const {coloredButtonText} = styles;
+    return <Text style={coloredButtonText}>{props.children}</Text>
+} 
 
 export const CircleButton = (props) => {
     return (
@@ -7,6 +12,29 @@ export const CircleButton = (props) => {
             {props.children}
         </TouchableOpacity>
     );
+};
+
+export const StandartButton = (props) => {
+    const {standartButton} = styles;
+    const fontBgColor = createButtonBgColor(props.type);
+    return (
+        <TouchableOpacity onPress={props.onPress} style={[standartButton, {backgroundColor: fontBgColor}]}>
+            <ColoredButtonText>{props.children}</ColoredButtonText>
+        </TouchableOpacity>
+    );
+};
+
+createButtonBgColor = (type) => {
+    switch (type) {
+        case 'primary':
+            return '#337AB7';
+        case 'confirm':
+            return '#5CB85C';
+        case 'cancel':
+            return '#F0AD4E';
+        default: 
+            return '#337AB7';
+    }
 };
 
 const styles = StyleSheet.create({
@@ -23,5 +51,12 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 5,
         shadowOpacity: 1.0
+    },
+    standartButton: {
+        padding: 7.5,
+        borderRadius: 4
+    },
+    coloredButtonText: {
+        color: '#FFFFFF'
     }
 });
