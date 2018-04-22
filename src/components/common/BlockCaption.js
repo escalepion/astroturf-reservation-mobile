@@ -12,6 +12,7 @@ const BlockCaption = (props) => {
 
 const styles = StyleSheet.create({
     container : {
+        alignItems: 'center',
         paddingTop: 20,
         paddingBottom: 20,
     },

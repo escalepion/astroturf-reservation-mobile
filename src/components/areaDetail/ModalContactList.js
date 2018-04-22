@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 
+import ContactListItem from './ContactListItem';
 
 class ModalContactList extends Component {
     constructor() {
@@ -46,7 +47,7 @@ class ModalContactList extends Component {
             return (
                 <FlatList
                     data={this.state.contactList.data}
-                    renderItem={({ item, index }) => <Text>{item.name && item.name} {item.phoneNumbers && item.phoneNumbers[0].number}</Text>}
+                    renderItem={({ item, index }) => <ContactListItem item={item} />}
                     keyExtractor={(item, index) => index}
                 />
             );
@@ -66,8 +67,12 @@ class ModalContactList extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        minHeight: 50,
-        maxHeight: 150
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: '#dddddd',
+        alignItems: 'center',
+        minHeight: 250,
+        maxHeight: 350
     }
 });
 

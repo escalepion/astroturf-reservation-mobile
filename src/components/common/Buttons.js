@@ -54,7 +54,9 @@ const styles = StyleSheet.create({
     },
     standartButton: {
         padding: 7.5,
-        borderRadius: 4
+        borderRadius: 4,
+        minWidth : 75,
+        alignItems : 'center'
     },
     coloredButtonText: {
         color: '#FFFFFF'

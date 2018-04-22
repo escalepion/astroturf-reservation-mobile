@@ -10,7 +10,7 @@ import {
 
 import ModalContactList from './ModalContactList';
 import BlockCaption from '../common/BlockCaption';
-import RowCenterContainer from '../common/RowCenterContainer';
+import RowAroundContainer from '../common/RowAroundContainer';
 import {StandartButton} from '../common/Buttons';
 
 class AddReservationModal extends Component {
@@ -32,12 +32,16 @@ class AddReservationModal extends Component {
                 {/*<TouchableWithoutFeedback onPress={closeModal}>*/}
                     <View style={styles.container}>
                         <View style={styles.contentContainer}>
-                            <BlockCaption>{this.state.selectedPerson ? this.state.selectedPerson : 'Kişi seçiniz'}</BlockCaption>
-                            <ModalContactList/>
-                            <RowCenterContainer>
-                                <StandartButton type='confirm' onPress={onAddConfirm}><Text>Ekle</Text></StandartButton>
-                                <StandartButton type='cancel' onPress={closeModal}><Text>İptal</Text></StandartButton>
-                            </RowCenterContainer>  
+                            <View style={styles.content}>
+                                <BlockCaption>{this.state.selectedPerson ? this.state.selectedPerson : 'Kişi seçiniz'}</BlockCaption>
+                                <ModalContactList/>
+                                <View style={styles.buttonsContainer}>                                
+                                    <RowAroundContainer>
+                                        <StandartButton type='confirm' onPress={onAddConfirm}><Text>Ekle</Text></StandartButton>
+                                        <StandartButton type='cancel' onPress={closeModal}><Text>İptal</Text></StandartButton>
+                                    </RowAroundContainer>  
+                                </View>
+                            </View>
                         </View>
                     </View>
                 {/*</TouchableWithoutFeedback>*/}
@@ -55,7 +59,15 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         backgroundColor: '#FFFFFF',
-        alignItems : 'center'
+        alignItems : 'center',
+    },
+    content: {
+        maxWidth: 500,
+        minWidth: 300
+    },
+    buttonsContainer: {
+        marginTop: 15,
+        marginBottom : 15
     }
 });
 
