@@ -16,7 +16,6 @@ class Hours extends Component {
         this.setState({ selectedHour: index });
     }
     onAddConfirm() {
-        console.log('add clicked');
         firebase.database().ref(`reservations/${this.props.selectedDate}`)
         .set({ [this.state.selectedHour]: { name: 'Haso' } })
         .then((response) => console.log(response.result))
@@ -36,7 +35,6 @@ class Hours extends Component {
         );
     }
     render() {
-        console.log(this.state.selectedHour);
         return (
             <View>
                 {this.renderHours()}
