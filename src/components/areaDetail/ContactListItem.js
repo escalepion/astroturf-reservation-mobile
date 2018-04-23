@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-const ContactListItem = ({item}) => {
+const ContactListItem = ({item, ...props}) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={props.onPress}>
             <View style={styles.container}>
                 <Text style={styles.name}>{item.name && item.name}</Text>
                 <Text>{item.phoneNumbers && item.phoneNumbers[0].number}</Text>

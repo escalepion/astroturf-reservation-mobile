@@ -43,11 +43,10 @@ class ModalContactList extends Component {
         if(this.state.contactList && this.state.contactList.data.length === 0) {
             return <Text>Henüz kişi eklenmemiş</Text>;
         }else if(this.state.contactList && this.state.contactList.data.length > 0) {
-            console.log(this.state.contactList);
             return (
                 <FlatList
                     data={this.state.contactList.data}
-                    renderItem={({ item, index }) => <ContactListItem item={item} />}
+                    renderItem={({ item, index }) => <ContactListItem onPress={() => this.props.selectPerson(item)} item={item} />}
                     keyExtractor={(item, index) => index}
                 />
             );

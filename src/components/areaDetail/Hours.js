@@ -15,11 +15,11 @@ class Hours extends Component {
     onAddPress(index) {
         this.setState({ selectedHour: index });
     }
-    onAddConfirm() {
+    onAddConfirm(id) {
         firebase.database().ref(`reservations/${this.props.selectedDate}`)
-        .set({ [this.state.selectedHour]: { name: 'Haso' } })
-        .then((response) => console.log(response.result))
-        .catch((error) => console.log(error));
+        .update({ [this.state.selectedHour]: { id } })
+        // .then((response) => console.log(response.result))
+        // .catch((error) => console.log(error));
     }
     closeModal() {
         this.setState({ selectedHour: undefined });

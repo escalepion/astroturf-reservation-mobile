@@ -20,6 +20,19 @@ class AddReservationModal extends Component {
             selectedPerson : undefined
         }
     }
+    selectPerson(selectedPerson) {
+        this.setState({ selectedPerson });
+    }
+    renderSelectedPersonString() {
+        const name = this.state.selectedPerson.name ? this.state.selectedPerson.name : '-';
+        const number = this.state.selectedPerson.phoneNumbers ? this.state.selectedPerson.phoneNumbers[0].number : '-';
+        return `${name} (${number})`;
+    }
+    handleConfirmPress() {
+        if(this.state.selectedPerson) {
+            this.props.onAddConfirm(this.state.selectedPerson.id);
+        }
+    }
     render() {
         const { visible, closeModal, onAddConfirm } = this.props;
         return (
@@ -33,11 +46,11 @@ class AddReservationModal extends Component {
                     <View style={styles.container}>
                         <View style={styles.contentContainer}>
                             <View style={styles.content}>
-                                <BlockCaption>{this.state.selectedPerson ? this.state.selectedPerson : 'Kişi seçiniz'}</BlockCaption>
-                                <ModalContactList/>
+                                <BlockCaption>{this.state.selectedPerson ? this.renderSelectedPersonString() : 'Kişi seçiniz'}</BlockCaption>
+                                <ModalContactList selectPerson={(selectedPerson) => this.selectPerson(selectedPerson)}/>
                                 <View style={styles.buttonsContainer}>                                
                                     <RowAroundContainer>
-                                        <StandartButton type='confirm' onPress={onAddConfirm}><Text>Ekle</Text></StandartButton>
+                                        <StandartButton type='confirm' onPress={this.handleConfirmPress.bind(this)}><Text>Ekle</Text></StandartButton>
                                         <StandartButton type='cancel' onPress={closeModal}><Text>İptal</Text></StandartButton>
                                     </RowAroundContainer>  
                                 </View>
