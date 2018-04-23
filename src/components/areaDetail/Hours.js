@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
 import firebase from 'firebase';
+import moment from 'moment';
 
 import { HoursMap } from '../../data/Hours';
 
@@ -10,13 +11,21 @@ import AddReservationModal from './AddReservationModal';
 class Hours extends Component {
     constructor(props) {
         super(props);
-        this.state = { selectedHour: undefined };
+        this.state = { selectedHour: undefined, dateData: {}, dateRefFormat : 'DDMMYYYY' };
+    }
+    componentDidMount() {
+        const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
+        firebase.database().ref(`reservations/${dateRef}`)
+        .on('value', snapshot => {
+            this.setState({ dateData: snapshot.val()});
+        });
     }
     onAddPress(index) {
         this.setState({ selectedHour: index });
     }
     onAddConfirm(id) {
-        firebase.database().ref(`reservations/${this.props.selectedDate}`)
+        const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
+        firebase.database().ref(`reservations/${dateRef}`)
         .update({ [this.state.selectedHour]: { id } })
         // .then((response) => console.log(response.result))
         // .catch((error) => console.log(error));
@@ -29,7 +38,7 @@ class Hours extends Component {
         return (
             <FlatList
                 data={arr}
-                renderItem={({ item, index }) => <HourItem onAddPress={() => this.onAddPress(index)} item={item} index={index} HoursMap={HoursMap} />}
+                renderItem={({ item, index }) => <HourItem onAddPress={() => this.onAddPress(index)} person={this.state.dateData[index] && this.state.dateData[index].id} item={item} index={index} HoursMap={HoursMap} />}
                 keyExtractor={(item, index) => index}
             />
         );
