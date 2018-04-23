@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
@@ -19,38 +19,50 @@ class DatePicker extends Component {
     onNextDateClick() {
         this.props.changeDate(this.props.selectedDate.add(1, 'days'));
     }
-    handleDatePicked = (date) => {
-        this.props.changeDate(date);
+    handleDatePicked (date) {
+        this.props.changeDate(moment(date));
         this.hideDateTimePicker();
     };
-    hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-    showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
-    onModalPress() {
-        this.setModalVisible(false);
+    hideDateTimePicker () {
+        this.setState({ isDateTimePickerVisible: false });
     }
-    render() {
+    showDateTimePicker () {
+        this.setState({ isDateTimePickerVisible: true });
+    }
+        render() {
+        const {datePickerContainer} = styles;
         return (
             <MainContainer>
-                <TouchableOpacity onPress={this.onPreviousDateClick.bind(this)}>
-                    <Icon name="add" color='#FFFFFF' containerStyle={{ backgroundColor: '#6733BA' }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.showDateTimePicker}>
-                    <Text>{moment(this.props.selectedDate).format(dateFormat)}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.onNextDateClick.bind(this)}>
-                    <Icon name="add" color='#FFFFFF' containerStyle={{ backgroundColor: '#6733BA' }} />
-                </TouchableOpacity>
-                <DateTimePicker
-                    date={new Date(this.props.selectedDate)}
-                    isVisible={this.state.isDateTimePickerVisible}
-                    onConfirm={this.handleDatePicked}
-                    onCancel={this.hideDateTimePicker}
-                    cancelTextIOS='İptal'
-                    confirmTextIOS='Tamam'
-                />
+                <View style={datePickerContainer}>
+                    <TouchableOpacity onPress={this.onPreviousDateClick.bind(this)}>
+                        <Icon raised name="keyboard-arrow-left" color='#FFFFFF' containerStyle={{ backgroundColor: '#89C541' }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.showDateTimePicker.bind(this)}>
+                        <Text>{moment(this.props.selectedDate).format(dateFormat)}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.onNextDateClick.bind(this)}>
+                        <Icon raised name="keyboard-arrow-right" color='#FFFFFF' containerStyle={{ backgroundColor: '#89C541' }} />
+                    </TouchableOpacity>
+                    <DateTimePicker
+                        date={new Date(this.props.selectedDate)}
+                        isVisible={this.state.isDateTimePickerVisible}
+                        onConfirm={this.handleDatePicked.bind(this)}
+                        onCancel={this.hideDateTimePicker.bind(this)}
+                        cancelTextIOS='İptal'
+                        confirmTextIOS='Tamam'
+                    />
+                </View>
             </MainContainer>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    datePickerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around'
+    }
+});
 
 export default DatePicker;
