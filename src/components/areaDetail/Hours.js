@@ -27,7 +27,7 @@ class Hours extends Component {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
         firebase.database().ref(`reservations/${dateRef}`)
         .update({ [this.state.selectedHour]: { id } })
-        // .then((response) => console.log(response.result))
+        .then((response) => this.setState({ selectedHour: undefined }))
         // .catch((error) => console.log(error));
     }
     closeModal() {
