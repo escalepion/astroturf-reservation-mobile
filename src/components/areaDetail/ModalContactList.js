@@ -1,51 +1,24 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import {connect} from 'react-redux';
+import * as actions from '../../actions/contacts';
 
 import ContactListItem from './ContactListItem';
 
 class ModalContactList extends Component {
-    constructor() {
-        super();
-        this.state = {
-            contactList: undefined
-        };
-    }
     componentDidMount() {
         this.showContactsAsync();
     }
     async showContactsAsync() {
-        // Ask for permission to query contacts.
-        const permission = await Expo.Permissions.askAsync(Expo.Permissions.CONTACTS);
-        if (permission.status !== 'granted') {
-            // Permission was denied...
-            return;
-        }
-        const contactList = await Expo.Contacts.getContactsAsync({
-            fields: [
-                Expo.Contacts.PHONE_NUMBERS,
-                Expo.Contacts.EMAILS,
-            ],
-            // pageSize: 10,
-            // pageOffset: 0,
-        });
-        this.setState({ contactList });
-        // if (contacts.total > 0) {
-        //     console.log(contacts);
-        //     console.log(
-        //         'Your first contact is...',
-        //         `Name: ${contacts.data[0].name}\n` +
-        //         `Phone numbers: ${JSON.stringify(contacts.data[0].phoneNumbers)}\n` +
-        //         `Emails: ${JSON.stringify(contacts.data[0].emails)}`
-        //     );
-        // }
+        this.props.getFullContacts();
     }
     mapContactList() {
-        if(this.state.contactList && this.state.contactList.data.length === 0) {
+        if(this.props.contactList && this.props.contactList.data.length === 0) {
             return <Text>Henüz kişi eklenmemiş</Text>;
-        }else if(this.state.contactList && this.state.contactList.data.length > 0) {
+        }else if(this.props.contactList && this.props.contactList.data.length > 0) {
             return (
                 <FlatList
-                    data={this.state.contactList.data}
+                    data={this.props.contactList.data}
                     renderItem={({ item, index }) => <ContactListItem onPress={() => this.props.selectPerson(item)} item={item} />}
                     keyExtractor={(item, index) => index}
                 />
@@ -75,4 +48,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ModalContactList;
+const mapStateToProps = (state) => {
+    return {contactList : state.contacts.contactList};
+}
+
+export default connect(mapStateToProps, actions)(ModalContactList);
