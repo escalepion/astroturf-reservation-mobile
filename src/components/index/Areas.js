@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Text, FlatList, View } from 'react-native';
 import firebase from 'firebase';
+import {connect} from 'react-redux';
+import * as actions from '../../actions/contacts';
 
 import MainContainer from '../common/MainContainer';
 import AreaItem from './AreaItem';
@@ -11,6 +13,12 @@ class Areas extends Component {
         this.state = {
             areaList: []
         };
+    }
+    componentDidMount() {
+        this.showContactsAsync();
+    }
+    async showContactsAsync() {
+        this.props.getFullContacts();
     }
     componentWillMount() {
         firebase.database().ref('areas').on('value', (snapshot) => {
@@ -50,4 +58,4 @@ class Areas extends Component {
     }
 }
 
-export default Areas;
+export default connect(null, actions)(Areas);

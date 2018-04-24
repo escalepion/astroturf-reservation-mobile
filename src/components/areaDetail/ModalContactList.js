@@ -6,12 +6,6 @@ import * as actions from '../../actions/contacts';
 import ContactListItem from './ContactListItem';
 
 class ModalContactList extends Component {
-    componentDidMount() {
-        this.showContactsAsync();
-    }
-    async showContactsAsync() {
-        this.props.getFullContacts();
-    }
     mapContactList() {
         if(this.props.contactList && this.props.contactList.data.length === 0) {
             return <Text>Henüz kişi eklenmemiş</Text>;

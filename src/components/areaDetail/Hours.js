@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
 import firebase from 'firebase';
 import moment from 'moment';
+import {connect} from 'react-redux';
 
 import { HoursMap } from '../../data/Hours';
 
@@ -33,12 +34,22 @@ class Hours extends Component {
     closeModal() {
         this.setState({ selectedHour: undefined });
     }
+    renderPerson(id) {
+        console.log(this.props.contactList);
+        if(this.props.contactList) {
+            const person = this.props.contactList.data.find(item => item.id === id);
+            if(person) {
+                return `${person.name} (${person.phoneNumbers && person.phoneNumbers[0].number})`;
+            }
+            return 'Bilinmeyen kullanıcı';
+        }
+    }
     renderHours() {
         const arr = Array(24).fill().map((e, i) => i + 1);
         return (
             <FlatList
                 data={arr}
-                renderItem={({ item, index }) => <HourItem onAddPress={() => this.onAddPress(index)} person={this.state.dateData && this.state.dateData[index] && this.state.dateData[index].id} item={item} index={index} HoursMap={HoursMap} />}
+                renderItem={({ item, index }) => <HourItem onAddPress={() => this.onAddPress(index)} person={this.state.dateData && this.state.dateData[index] && this.renderPerson(this.state.dateData[index].id)} item={item} index={index} HoursMap={HoursMap} />}
                 keyExtractor={(item, index) => index}
             />
         );
@@ -57,4 +68,8 @@ class Hours extends Component {
     }
 }
 
-export default Hours;
+const mapStateToProps = (state) => {
+    return {contactList : state.contacts.contactList};
+}
+
+export default connect(mapStateToProps, null)(Hours);
