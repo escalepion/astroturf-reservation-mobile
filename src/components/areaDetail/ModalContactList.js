@@ -11,9 +11,9 @@ class ModalContactList extends Component {
         };
     }
     componentDidMount() {
-        this.showFirstContactAsync();
+        this.showContactsAsync();
     }
-    async showFirstContactAsync() {
+    async showContactsAsync() {
         // Ask for permission to query contacts.
         const permission = await Expo.Permissions.askAsync(Expo.Permissions.CONTACTS);
         if (permission.status !== 'granted') {

@@ -6,7 +6,8 @@ const HourItem = ({ index, HoursMap, onAddPress, person }) => {
     const { hourItemContainer } = styles;
     return (
         <View style={hourItemContainer}>
-            <Text>{`${HoursMap[index]} - ${HoursMap[index + 1]} ${person ? person : 'Boş'}`}</Text>
+            <Text>{`${HoursMap[index]} - ${HoursMap[index + 1]}`}</Text>
+            <Text>{person ? person : 'Boş'}</Text>
             <Icon raised name="add" color='#FFFFFF' containerStyle={{ backgroundColor: '#6733BA' }} onPress={onAddPress} />
         </View>
     );

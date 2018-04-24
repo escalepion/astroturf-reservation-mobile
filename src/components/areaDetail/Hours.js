@@ -16,9 +16,9 @@ class Hours extends Component {
     componentDidMount() {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
         firebase.database().ref(`reservations/${dateRef}`)
-        .on('value', snapshot => {
-            this.setState({ dateData: snapshot.val()});
-        });
+            .on('value', snapshot => {
+                this.setState({ dateData: snapshot.val() });
+            });
     }
     onAddPress(index) {
         this.setState({ selectedHour: index });
@@ -38,7 +38,7 @@ class Hours extends Component {
         return (
             <FlatList
                 data={arr}
-                renderItem={({ item, index }) => <HourItem onAddPress={() => this.onAddPress(index)} person={this.state.dateData[index] && this.state.dateData[index].id} item={item} index={index} HoursMap={HoursMap} />}
+                renderItem={({ item, index }) => <HourItem onAddPress={() => this.onAddPress(index)} person={this.state.dateData && this.state.dateData[index] && this.state.dateData[index].id} item={item} index={index} HoursMap={HoursMap} />}
                 keyExtractor={(item, index) => index}
             />
         );
