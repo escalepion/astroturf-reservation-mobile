@@ -11,30 +11,30 @@ import {
 import ModalContactList from './ModalContactList';
 import BlockCaption from '../common/BlockCaption';
 import RowAroundContainer from '../common/RowAroundContainer';
-import {StandartButton} from '../common/Buttons';
+import { StandartButton } from '../common/Buttons';
 
 class AddReservationModal extends Component {
     constructor() {
         super();
         this.state = {
-            selectedPerson : undefined
-        }
+            selectedPerson: undefined
+        };
     }
     selectPerson(selectedPerson) {
         this.setState({ selectedPerson });
+    }
+    handleConfirmPress() {
+        if (this.state.selectedPerson) {
+            this.props.onAddConfirm(this.state.selectedPerson.id);
+        }
     }
     renderSelectedPersonString() {
         const name = this.state.selectedPerson.name ? this.state.selectedPerson.name : '-';
         const number = this.state.selectedPerson.phoneNumbers ? this.state.selectedPerson.phoneNumbers[0].number : '-';
         return `${name} (${number})`;
     }
-    handleConfirmPress() {
-        if(this.state.selectedPerson) {
-            this.props.onAddConfirm(this.state.selectedPerson.id);
-        }
-    }
     render() {
-        const { visible, closeModal, onAddConfirm } = this.props;
+        const { visible, closeModal } = this.props;
         return (
             <Modal
                 animationType={'slide'}

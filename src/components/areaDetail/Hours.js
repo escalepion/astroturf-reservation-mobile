@@ -12,7 +12,7 @@ import AddReservationModal from './AddReservationModal';
 class Hours extends Component {
     constructor(props) {
         super(props);
-        this.state = { selectedHour: undefined };
+        this.state = { selectedHour: undefined, dateRefFormat: 'DDMMYYYY' };
     }
     onAddPress(index) {
         this.setState({ selectedHour: index });

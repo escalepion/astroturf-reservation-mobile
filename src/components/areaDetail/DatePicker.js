@@ -29,6 +29,7 @@ class DatePicker extends Component {
     handleDatePicked(date) {
         this.props.changeDate(moment(date));
         this.hideDateTimePicker();
+        this.props.fetchReservations(this.props.selectedDate);
     }
     hideDateTimePicker() {
         this.setState({ isDateTimePickerVisible: false });
