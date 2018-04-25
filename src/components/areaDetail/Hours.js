@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
 import firebase from 'firebase';
 import moment from 'moment';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import { HoursMap } from '../../data/Hours';
 
@@ -12,14 +12,7 @@ import AddReservationModal from './AddReservationModal';
 class Hours extends Component {
     constructor(props) {
         super(props);
-        this.state = { selectedHour: undefined, dateData: {}, dateRefFormat : 'DDMMYYYY' };
-    }
-    componentDidMount() {
-        const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
-        firebase.database().ref(`reservations/${dateRef}`)
-            .on('value', snapshot => {
-                this.setState({ dateData: snapshot.val() });
-            });
+        this.state = { selectedHour: undefined };
     }
     onAddPress(index) {
         this.setState({ selectedHour: index });
@@ -28,7 +21,7 @@ class Hours extends Component {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
         firebase.database().ref(`reservations/${dateRef}`)
         .update({ [this.state.selectedHour]: { id } })
-        .then((response) => this.setState({ selectedHour: undefined }))
+        .then(() => this.setState({ selectedHour: undefined }));
         // .catch((error) => console.log(error));
     }
     closeModal() {
@@ -49,7 +42,7 @@ class Hours extends Component {
         return (
             <FlatList
                 data={arr}
-                renderItem={({ item, index }) => <HourItem onAddPress={() => this.onAddPress(index)} person={this.state.dateData && this.state.dateData[index] && this.renderPerson(this.state.dateData[index].id)} item={item} index={index} HoursMap={HoursMap} />}
+                renderItem={({ item, index }) => <HourItem onAddPress={() => this.onAddPress(index)} person={this.props.reservationList && this.props.reservationList[index] && this.renderPerson(this.props.reservationList[index].id)} item={item} index={index} HoursMap={HoursMap} />}
                 keyExtractor={(item, index) => index}
             />
         );
@@ -69,7 +62,7 @@ class Hours extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {contactList : state.contacts.contactList};
-}
+    return { contactList: state.contacts.contactList, reservationList: state.reservations.reservationList };
+};
 
 export default connect(mapStateToProps, null)(Hours);

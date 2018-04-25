@@ -1,16 +1,17 @@
 import {
-    GET_FULL_CONTACT_LIST
+    FETCH_RESERVATIONS
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    contactList: undefined
+    reservationList: undefined
 };
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
-        case GET_FULL_CONTACT_LIST:
-            return {...state, contactList: action.payload};
+        case FETCH_RESERVATIONS:
+            return {...state, reservationList: action.payload };
         default:
             return state;
     }
 }
+

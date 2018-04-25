@@ -3,6 +3,8 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import * as actions from '../../actions/reservations'
 
 import { dateFormat } from '../../data/StaticVars';
 
@@ -13,24 +15,29 @@ class DatePicker extends Component {
         super(props);
         this.state = { isDateTimePickerVisible: false };
     }
+    componentDidMount() {
+        this.props.fetchReservations(this.props.selectedDate);
+    }
     onPreviousDateClick() {
         this.props.changeDate(this.props.selectedDate.subtract(1, 'days'));
+        this.props.fetchReservations(this.props.selectedDate);
     }
     onNextDateClick() {
         this.props.changeDate(this.props.selectedDate.add(1, 'days'));
+        this.props.fetchReservations(this.props.selectedDate);
     }
-    handleDatePicked (date) {
+    handleDatePicked(date) {
         this.props.changeDate(moment(date));
         this.hideDateTimePicker();
-    };
-    hideDateTimePicker () {
+    }
+    hideDateTimePicker() {
         this.setState({ isDateTimePickerVisible: false });
     }
-    showDateTimePicker () {
+    showDateTimePicker() {
         this.setState({ isDateTimePickerVisible: true });
     }
         render() {
-        const {datePickerContainer} = styles;
+        const { datePickerContainer } = styles;
         return (
             <MainContainer>
                 <View style={datePickerContainer}>
@@ -65,4 +72,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DatePicker;
+const mapStateToProps = (state) => {
+    return { reservationList: state.reservations.reservationList };
+};
+
+export default connect(mapStateToProps, actions)(DatePicker);
