@@ -43,13 +43,13 @@ class DatePicker extends Component {
             <MainContainer>
                 <View style={datePickerContainer}>
                     <TouchableOpacity onPress={this.onPreviousDateClick.bind(this)}>
-                        <Icon raised name="keyboard-arrow-left" color='#FFFFFF' containerStyle={{ backgroundColor: '#89C541' }} />
+                        <Icon raised size={12} name="keyboard-arrow-left" color='#FFFFFF' containerStyle={{ backgroundColor: '#89C541' }} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this.showDateTimePicker.bind(this)}>
                         <Text>{moment(this.props.selectedDate).format(dateFormat)}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this.onNextDateClick.bind(this)}>
-                        <Icon raised name="keyboard-arrow-right" color='#FFFFFF' containerStyle={{ backgroundColor: '#89C541' }} />
+                        <Icon raised size={12} name="keyboard-arrow-right" color='#FFFFFF' containerStyle={{ backgroundColor: '#89C541' }} />
                     </TouchableOpacity>
                     <DateTimePicker
                         date={new Date(this.props.selectedDate)}
