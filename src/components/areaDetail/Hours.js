@@ -22,16 +22,14 @@ class Hours extends Component {
         firebase.database().ref(`reservations/${dateRef}`)
         .update({ [this.state.selectedHour]: { id } })
         .then(() => this.setState({ selectedHour: undefined }));
-        // .catch((error) => console.log(error));
     }
     closeModal() {
         this.setState({ selectedHour: undefined });
     }
     renderPerson(id) {
-        console.log(this.props.contactList);
-        if(this.props.contactList) {
+        if (this.props.contactList) {
             const person = this.props.contactList.data.find(item => item.id === id);
-            if(person) {
+            if (person) {
                 return `${person.name} (${person.phoneNumbers && person.phoneNumbers[0].number})`;
             }
             return 'Bilinmeyen kullanıcı';
@@ -51,7 +49,7 @@ class Hours extends Component {
         return (
             <View>
                 {this.renderHours()}
-                {this.state.selectedHour >=0 ? <AddReservationModal
+                {this.state.selectedHour >= 0 ? <AddReservationModal
                     closeModal={this.closeModal.bind(this)}
                     visible={this.state.selectedHour && true}
                     onAddConfirm={this.onAddConfirm.bind(this)}

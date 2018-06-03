@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../../actions/contacts';
 
 import ContactListItem from './ContactListItem';
 
 class ModalContactList extends Component {
     mapContactList() {
-        if(this.props.contactList && this.props.contactList.data.length === 0) {
+        if (this.props.contactList && this.props.contactList.data.length === 0) {
             return <Text>Henüz kişi eklenmemiş</Text>;
-        }else if(this.props.contactList && this.props.contactList.data.length > 0) {
+        } else if (this.props.contactList && this.props.contactList.data.length > 0) {
             return (
                 <FlatList
                     data={this.props.contactList.data}
@@ -17,14 +17,14 @@ class ModalContactList extends Component {
                     keyExtractor={(item, index) => index}
                 />
             );
-        }else {
+        } else {
             return <Text>Liste yükleniyor...</Text>
         }
     }
     render() {
-        const {container} = styles;
+        const { container } = styles;
         return (
-            <View style={styles.container}>
+            <View style={container}>
                 {this.mapContactList()}
             </View>
         );
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    return {contactList : state.contacts.contactList};
+    return { contactList: state.contacts.contactList };
 }
 
 export default connect(mapStateToProps, actions)(ModalContactList);
