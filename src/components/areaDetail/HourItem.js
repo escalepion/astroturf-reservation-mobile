@@ -13,14 +13,6 @@ const HourItem = ({ index, HoursMap, onAddPress, person }) => {
             <View style={iconsContainer}>
                 <Icon 
                 raised 
-                name="add" 
-                color='#FFFFFF' 
-                containerStyle={{ backgroundColor: '#6733BA' }} 
-                onPress={onAddPress}
-                size={10}
-                />
-                <Icon 
-                raised 
                 name="edit" 
                 color='#FFFFFF' 
                 containerStyle={{ backgroundColor: '#6733BA' }} 

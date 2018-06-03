@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         backgroundColor: '#FFFFFF',
-        alignItems : 'center',
+        alignItems: 'center',
     },
     content: {
         maxWidth: 500,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     },
     buttonsContainer: {
         marginTop: 15,
-        marginBottom : 15
+        marginBottom: 15
     }
 });
 
