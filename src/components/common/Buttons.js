@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 const ColoredButtonText = (props) => {
-    const {coloredButtonText} = styles;
+    const { coloredButtonText } = styles;
     return <Text style={coloredButtonText}>{props.children}</Text>
 } 
 
@@ -15,7 +15,7 @@ export const CircleButton = (props) => {
 };
 
 export const StandartButton = (props) => {
-    const {standartButton} = styles;
+    const { standartButton } = styles;
     const fontBgColor = createButtonBgColor(props.type);
     return (
         <TouchableOpacity onPress={props.onPress} style={[standartButton, {backgroundColor: fontBgColor}]}>
@@ -24,7 +24,7 @@ export const StandartButton = (props) => {
     );
 };
 
-createButtonBgColor = (type) => {
+const createButtonBgColor = (type) => {
     switch (type) {
         case 'primary':
             return '#337AB7';
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     standartButton: {
         padding: 7.5,
         borderRadius: 4,
-        minWidth : 75,
-        alignItems : 'center'
+        minWidth: 75,
+        alignItems: 'center'
     },
     coloredButtonText: {
         color: '#FFFFFF'

@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 const RowCenterContainer = (props) => {
-    const {centerContainer} = styles;
+    const { centerContainer } = styles;
     return (
         <View style={centerContainer}>{props.children}</View>
     );
@@ -10,7 +10,7 @@ const RowCenterContainer = (props) => {
 
 const styles = StyleSheet.create({
     centerContainer: {
-        flexDirection : 'row',
+        flexDirection: 'row',
         justifyContent: 'center'
     }
 });

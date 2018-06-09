@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-const HourItem = ({ index, HoursMap, onAddPress, person }) => {
+const HourItem = ({ index, HoursMap, onAddPress, person, onDeletePress }) => {
     const { hourItemContainer, iconsContainer, personInfoContainer, personInfo } = styles;
     return (
         <View style={hourItemContainer}>
@@ -24,7 +24,7 @@ const HourItem = ({ index, HoursMap, onAddPress, person }) => {
                 name="delete" 
                 color='#FFFFFF' 
                 containerStyle={{ backgroundColor: '#6733BA' }} 
-                onPress={onAddPress}
+                onPress={onDeletePress}
                 size={10}
                 />
             </View>

@@ -17,7 +17,7 @@ class AreaDetail extends Component {
         return (
             <View>
                 <DatePicker selectedDate={this.state.selectedDate} changeDate={(date) => this.changeDate(date)} />
-                <Hours selectedDate={this.state.selectedDate}/>
+                <Hours selectedDate={this.state.selectedDate} />
             </View>
         );
     }

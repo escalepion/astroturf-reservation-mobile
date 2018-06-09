@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { 
     Modal, 
     Text, 
-    TouchableWithoutFeedback, 
     View, 
-    StyleSheet, 
-    TouchableOpacity
+    StyleSheet
 } from 'react-native';
 
 import ModalContactList from './ModalContactList';
