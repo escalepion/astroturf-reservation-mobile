@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderWidth: 0.5,
         borderColor: '#d6d7da',
-        display: 'flex',
         marginTop: 5,
         padding: 5
     }

@@ -15,7 +15,7 @@ class AreaDetail extends Component {
     }
     render() {
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <DatePicker selectedDate={this.state.selectedDate} changeDate={(date) => this.changeDate(date)} />
                 <Hours selectedDate={this.state.selectedDate} />
             </View>

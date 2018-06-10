@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import firebase from 'firebase';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -66,7 +66,7 @@ class Hours extends Component {
     }
     render() {
         return (
-            <View>
+            <View style={styles.hoursContainer}>
                 {this.renderHours()}
                 {this.state.selectedHour >= 0 ? <AddReservationModal
                     closeModal={this.closeModal.bind(this)}
@@ -82,6 +82,12 @@ class Hours extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    hoursContainer: {
+        flex: 1
+    }
+});
 
 const mapStateToProps = (state) => {
     return { 
