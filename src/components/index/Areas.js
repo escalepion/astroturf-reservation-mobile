@@ -14,12 +14,6 @@ class Areas extends Component {
             areaList: []
         };
     }
-    componentDidMount() {
-        this.showContactsAsync();
-    }
-    async showContactsAsync() {
-        this.props.getFullContacts();
-    }
     componentWillMount() {
         firebase.database().ref('areas').on('value', (snapshot) => {
             if (snapshot.val()) {
@@ -31,9 +25,15 @@ class Areas extends Component {
             }
         });
     }
+    componentDidMount() {
+        this.showContactsAsync();
+    }
     onDeleteAreaClick(id) {
         firebase.database().ref(`areas/${id}`)
         .remove();
+    }
+    showContactsAsync() {
+        this.props.getFullContacts();
     }
     renderAreaList() {
         return (

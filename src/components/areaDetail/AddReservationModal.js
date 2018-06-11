@@ -3,8 +3,12 @@ import {
     Modal, 
     Text, 
     View, 
-    StyleSheet
+    StyleSheet,
+    Alert
 } from 'react-native';
+import Expo from 'expo';
+import { connect } from 'react-redux';
+import firebase from 'firebase';
 
 import ModalContactList from './ModalContactList';
 import BlockCaption from '../common/BlockCaption';
@@ -22,10 +26,32 @@ class AddReservationModal extends Component {
         this.setState({ selectedPerson });
     }
     handleConfirmPress() {
-        if (this.state.selectedPerson) {
-            this.props.onAddConfirm(this.state.selectedPerson.id);
+        const selectedPerson = this.state.selectedPerson;
+        if ((selectedPerson || {}).phoneNumbers) {
+            this.props.onAddConfirm(this.state.selectedPerson.phoneNumbers[0].number);
         }
     }
+
+    async refreshContactList() {
+        // Ask for permission to query contacts.
+        const permission = await Expo.Permissions.askAsync(Expo.Permissions.CONTACTS);
+        if (permission.status !== 'granted') {
+            // Permission was denied...
+            return;
+        }
+        const contactList = await Expo.Contacts.getContactsAsync({
+            fields: [
+                Expo.Contacts.PHONE_NUMBERS,
+                Expo.Contacts.EMAILS,
+            ],
+            // pageSize: 10,
+            // pageOffset: 0,
+        });
+        const dataRef = 'contactList';
+        firebase.database().ref(dataRef)
+        .update(contactList);
+    }
+    
     renderSelectedPersonString() {
         const name = this.state.selectedPerson.name ? this.state.selectedPerson.name : '-';
         const number = this.state.selectedPerson.phoneNumbers ? this.state.selectedPerson.phoneNumbers[0].number : '-';
@@ -49,6 +75,7 @@ class AddReservationModal extends Component {
                                 <View style={styles.buttonsContainer}>                                
                                     <RowAroundContainer>
                                         <StandartButton type='confirm' onPress={this.handleConfirmPress.bind(this)}><Text>Ekle</Text></StandartButton>
+                                        <StandartButton type='confirm' onPress={this.refreshContactList.bind(this)}><Text>Listeyi Güncelle</Text></StandartButton>
                                         <StandartButton type='cancel' onPress={closeModal}><Text>İptal</Text></StandartButton>
                                     </RowAroundContainer>  
                                 </View>
@@ -82,4 +109,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AddReservationModal;
+const mapStateToProps = (state) => {
+    return { contactList: state.contacts.contactList };
+};
+
+export default connect(mapStateToProps, null)(AddReservationModal);

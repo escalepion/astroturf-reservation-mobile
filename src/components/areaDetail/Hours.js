@@ -21,10 +21,11 @@ class Hours extends Component {
     onDeletePress(index) {
         this.setState({ selectedDeleteHour: index });
     }
-    onAddConfirm(id) {
+    onAddConfirm(number = '') {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
+        const last10cars = this.setPhoneNumber(number);
         firebase.database().ref(`reservations/${dateRef}`)
-        .update({ [this.state.selectedHour]: { id } })
+        .update({ [this.state.selectedHour]: { id: last10cars } })
         .then(() => this.setState({ selectedHour: undefined }));
     }
     onDeleteConfirm() {
@@ -33,6 +34,11 @@ class Hours extends Component {
         .remove()
         .then(() => this.setState({ selectedDeleteHour: undefined }));
     }
+    setPhoneNumber(number) {
+        const phoneNumber = number.replace(/\D/g, '');
+        const last10cars = phoneNumber.length <= 10 ? phoneNumber : phoneNumber.substr(phoneNumber.length - 10);
+        return last10cars;
+    }
     closeModal() {
         this.setState({ selectedHour: undefined });
     }
@@ -40,8 +46,14 @@ class Hours extends Component {
         this.setState({ selectedDeleteHour: undefined });
     }
     renderPerson(id) {
+        //id is phone number in this case
         if (this.props.contactList) {
-            const person = this.props.contactList.data.find(item => item.id === id);
+            const person = this.props.contactList.data.find((item) => {
+                if (!item.phoneNumbers) {
+                    return false;
+                }
+                return this.setPhoneNumber(item.phoneNumbers[0].number) === id;
+            });
             if (person) {
                 return `${person.name} (${person.phoneNumbers && person.phoneNumbers[0].number})`;
             }
