@@ -29,7 +29,6 @@ class ModalContactList extends Component {
         }
     }
     render() {
-        console.log(this.props.contactList);
         const { container } = styles;
         return (
             <View style={container}>

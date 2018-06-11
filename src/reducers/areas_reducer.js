@@ -1,16 +1,16 @@
 import {
-    GET_FULL_CONTACT_LIST
+    GET_AREA_LIST
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    contactList: undefined
+    areaList: []
 };
 
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
-        case GET_FULL_CONTACT_LIST:
-            return { ...state, contactList: action.payload };
+        case GET_AREA_LIST:
+            return { ...state, areaList: action.payload };
         default:
             return state;
     }
-}
+};

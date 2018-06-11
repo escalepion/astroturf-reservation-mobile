@@ -10,5 +10,5 @@ export const getFullContacts = () => {
                 dispatch({ type: GET_FULL_CONTACT_LIST, payload: snapshot.val() });
             });
     };
-}
+};
 

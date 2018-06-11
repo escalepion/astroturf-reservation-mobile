@@ -3,9 +3,11 @@ import { reducer as form } from 'redux-form';
 
 import ContactsReducer from './contacts_reducer';
 import ReservationsReducer from './reservations_reducer';
+import AreaListReducer from './areas_reducer';
 
 export default combineReducers({
     form,
     contacts: ContactsReducer,
-    reservations: ReservationsReducer
+    reservations: ReservationsReducer,
+    areas: AreaListReducer
     });
