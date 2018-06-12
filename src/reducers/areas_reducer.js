@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     areaList: []
 };
 
-export default function (state = INITIAL_STATE, action) {
+export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_AREA_LIST:
             return { ...state, areaList: action.payload };

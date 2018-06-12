@@ -6,10 +6,10 @@ const INITIAL_STATE = {
     reservationList: undefined
 };
 
-export default function (state = INITIAL_STATE, action) {
+export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case FETCH_RESERVATIONS:
-            return {...state, reservationList: action.payload };
+            return { ...state, reservationList: action.payload };
         default:
             return state;
     }

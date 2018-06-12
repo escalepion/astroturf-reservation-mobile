@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     contactList: undefined
 };
 
-export default function (state = INITIAL_STATE, action) {
+export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_FULL_CONTACT_LIST:
             return { ...state, contactList: action.payload };
