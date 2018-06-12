@@ -5,7 +5,7 @@ import {
     View,
     StyleSheet
 } from 'react-native';
-import { FormInput } from 'react-native-elements';
+import { SearchBar } from 'react-native-elements';
 import Expo from 'expo';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
@@ -83,9 +83,13 @@ class AddReservationModal extends Component {
                     <View style={styles.contentContainer}>
                         <View style={styles.content}>
                             <BlockCaption>{this.state.selectedPerson ? this.renderSelectedPersonString() : 'Kişi seçiniz'}</BlockCaption>
-                            <FormInput
-                                placeholder='Search'
+                            <SearchBar
+                                lightTheme
+                                showLoading
+                                platform="ios"
+                                clearIcon={{ color: '#ddd' }}
                                 onChangeText={(e) => this.onInputChange(e)}
+                                placeholder='Ara' 
                             />
                             <ModalContactList contactList={this.state.filteredContactList || this.props.contactList} selectPerson={(selectedPerson) => this.selectPerson(selectedPerson)} />
                             <View style={styles.buttonsContainer}>
