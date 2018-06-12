@@ -91,7 +91,7 @@ class AddReservationModal extends Component {
                             <View style={styles.buttonsContainer}>
                                 <RowAroundContainer>
                                     <StandartButton type='confirm' onPress={this.handleConfirmPress.bind(this)}><Text>Ekle</Text></StandartButton>
-                                    <StandartButton type='confirm' onPress={this.refreshContactList.bind(this)}><Text>Listeyi Güncelle</Text></StandartButton>
+                                    <StandartButton type='primary' onPress={this.refreshContactList.bind(this)}><Text>Listeyi Güncelle</Text></StandartButton>
                                     <StandartButton type='cancel' onPress={closeModal}><Text>İptal</Text></StandartButton>
                                 </RowAroundContainer>
                             </View>
