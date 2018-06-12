@@ -28,8 +28,8 @@ class ModalContactList extends Component {
     }
     sortNames() {
         return this.props.contactList.data.sort((a, b) => {
-            const nameA = a.name.toUpperCase();
-            const nameB = b.name.toUpperCase();
+            const nameA = a.name && a.name.toUpperCase();
+            const nameB = b.name && b.name.toUpperCase();
             if (nameA > nameB) {
                 return 1;
             }

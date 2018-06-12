@@ -9,7 +9,9 @@ export const fetchAreas = () => {
         firebase.database().ref('areas')
             .on('value', snapshot => {
                 let areaList = [];
-                Object.keys(snapshot.val()).forEach((i) => { areaList.push({ ...snapshot.val()[i], id: i }); });
+                if (snapshot.val()) {
+                    Object.keys(snapshot.val()).forEach((i) => { areaList.push({ ...snapshot.val()[i], id: i }); });
+                }
                 dispatch({ type: GET_AREA_LIST, payload: areaList });
             });
     };

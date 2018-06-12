@@ -3,6 +3,7 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import firebase from 'firebase';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { ListItem } from 'react-native-elements';
 
 import { HoursMap } from '../../data/Hours';
 
@@ -25,14 +26,14 @@ class Hours extends Component {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
         const last10cars = this.setPhoneNumber(number);
         firebase.database().ref(`reservations/${dateRef}`)
-        .update({ [this.state.selectedHour]: { id: last10cars } })
-        .then(() => this.setState({ selectedHour: undefined }));
+            .update({ [this.state.selectedHour]: { id: last10cars } })
+            .then(() => this.setState({ selectedHour: undefined }));
     }
     onDeleteConfirm() {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
         firebase.database().ref(`reservations/${dateRef}/${this.state.selectedDeleteHour}`)
-        .remove()
-        .then(() => this.setState({ selectedDeleteHour: undefined }));
+            .remove()
+            .then(() => this.setState({ selectedDeleteHour: undefined }));
     }
     setPhoneNumber(number) {
         const phoneNumber = number.replace(/\D/g, '');
@@ -65,12 +66,12 @@ class Hours extends Component {
         return (
             <FlatList
                 data={arr}
-                renderItem={({ item, index }) => <HourItem 
-                onAddPress={() => this.onAddPress(index)} 
-                onDeletePress={() => this.onDeletePress(index)}
-                person={this.props.reservationList && this.props.reservationList[index] && this.renderPerson(this.props.reservationList[index].id)} 
-                item={item} index={index} 
-                HoursMap={HoursMap} 
+                renderItem={({ item, index }) => <HourItem
+                    onAddPress={() => this.onAddPress(index)}
+                    onDeletePress={() => this.onDeletePress(index)}
+                    person={this.props.reservationList && this.props.reservationList[index] && this.renderPerson(this.props.reservationList[index].id)}
+                    item={item} index={index}
+                    HoursMap={HoursMap}
                 />}
                 keyExtractor={(item, index) => index}
             />
@@ -102,10 +103,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    return { 
-        contactList: state.contacts.contactList, 
-        reservationList: state.reservations.reservationList 
-        };
+    return {
+        contactList: state.contacts.contactList,
+        reservationList: state.reservations.reservationList
+    };
 };
 
 export default connect(mapStateToProps, null)(Hours);
