@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import firebase from 'firebase';
-import { connect } from 'react-redux';
-import * as actions from '../../actions/contacts';
 
 import ContactListItem from './ContactListItem';
 
@@ -14,7 +12,6 @@ class ModalContactList extends Component {
             });
     }
     mapContactList() {
-        console.log(this.sortNames());
         if (this.props.contactList && this.props.contactList.data.length === 0) {
             return <Text>Henüz kişi eklenmemiş</Text>;
         } else if (this.props.contactList && this.props.contactList.data.length > 0) {
@@ -43,7 +40,6 @@ class ModalContactList extends Component {
         });
     }
     render() {
-        console.log(this.props.contactList.data);
         const { container } = styles;
         return (
             <View style={container}>
@@ -59,13 +55,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#dddddd',
         alignItems: 'center',
-        minHeight: 250,
-        maxHeight: 350
+        height: 350
     }
 });
 
-const mapStateToProps = (state) => {
-    return { contactList: state.contacts.contactList };
-};
 
-export default connect(mapStateToProps, actions)(ModalContactList);
+export default ModalContactList;
