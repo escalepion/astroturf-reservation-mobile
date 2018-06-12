@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 
 import IndexHeader from '../components/index/IndexHeader';
 import Areas from '../components/index/Areas';
@@ -7,12 +7,20 @@ import Areas from '../components/index/Areas';
 class Index extends Component {
     render() {
         return (
-            <ScrollView>
+            <View style={styles.container}>
+                <ScrollView>
+                    <Areas />
+                </ScrollView>
                 <IndexHeader />
-                <Areas />
-            </ScrollView>
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    }
+});
 
 export default Index;

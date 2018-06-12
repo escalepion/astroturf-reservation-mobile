@@ -14,7 +14,7 @@ const IndexHeader = (props) => {
                         raised
                         name="add"
                         color='#FFFFFF'
-                        containerStyle={{ backgroundColor: '#6733BA' }}
+                        containerStyle={{ backgroundColor: '#5CB85C' }}
                     />
                 </TouchableOpacity>
             </View>
