@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderWidth: 2,
         borderColor: '#dddddd',
-        height: 350,
+        minHeight: 150,
+        maxHeight: 350,
         marginTop: 15,
         marginBottom: 15
     }
