@@ -13,7 +13,7 @@ class ModalContactList extends Component {
     }
     mapContactList() {
         if (this.props.contactList && this.props.contactList.data.length === 0) {
-            return <Text>Henüz kişi eklenmemiş</Text>;
+            return <Text>Kişi bulunamadı...</Text>;
         } else if (this.props.contactList && this.props.contactList.data.length > 0) {
             return (
                 <FlatList

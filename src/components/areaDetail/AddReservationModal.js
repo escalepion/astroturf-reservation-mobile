@@ -26,14 +26,16 @@ class AddReservationModal extends Component {
     }
     onInputChange(e) {
         const filteredData = [];
-        this.props.contactList.data.forEach((contact) => {
-            const name = contact.name;
-            if (name.toString().toLowerCase().indexOf(e.toLowerCase()) > -1) {
-                filteredData.push(contact);
-            }
-        });
-        const newData = { ...this.props.contactList, data: filteredData };
-        this.setState({ filteredContactList: newData });
+        if (this.props.contactList.data) {
+            this.props.contactList.data.forEach((contact) => {
+                const name = contact.name;
+                if (name && name.toString().toLowerCase().indexOf(e.toLowerCase()) > -1) {
+                    filteredData.push(contact);
+                }
+            });
+            const newData = { ...this.props.contactList, data: filteredData };
+            this.setState({ filteredContactList: newData });
+        }
     }
     selectPerson(selectedPerson) {
         this.setState({ selectedPerson });
