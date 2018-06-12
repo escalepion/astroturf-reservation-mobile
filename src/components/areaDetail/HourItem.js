@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 
 const HourItem = ({ index, HoursMap, onAddPress, person, onDeletePress }) => {
-    // const { hourItemContainer, iconsContainer, personInfoContainer, personInfo } = styles;
+    const { hourItemContainer, iconsContainer, personInfoContainer, personInfo } = styles;
     return (
         // <View style={hourItemContainer}>
         //     <Text>{`${HoursMap[index]} - ${HoursMap[index + 1]}`}</Text>

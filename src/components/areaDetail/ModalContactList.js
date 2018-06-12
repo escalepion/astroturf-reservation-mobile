@@ -52,10 +52,11 @@ class ModalContactList extends Component {
 const styles = StyleSheet.create({
     container: {
         borderStyle: 'solid',
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: '#dddddd',
-        alignItems: 'center',
-        height: 350
+        height: 350,
+        marginTop: 15,
+        marginBottom: 15
     }
 });
 
