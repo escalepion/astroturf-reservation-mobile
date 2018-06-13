@@ -21,7 +21,8 @@ class AddReservationModal extends Component {
         super();
         this.state = {
             selectedPerson: undefined,
-            filteredContactList: undefined
+            filteredContactList: undefined,
+            contactListRefreshingSpinner: false
         };
     }
     onInputChange(e) {
@@ -48,6 +49,7 @@ class AddReservationModal extends Component {
     }
 
     async refreshContactList() {
+        this.setState({ contactListRefreshingSpinner: true });
         // Ask for permission to query contacts.
         const permission = await Expo.Permissions.askAsync(Expo.Permissions.CONTACTS);
         if (permission.status !== 'granted') {
@@ -64,7 +66,8 @@ class AddReservationModal extends Component {
         });
         const dataRef = 'contactList';
         firebase.database().ref(dataRef)
-            .update(contactList);
+        .update(contactList)
+        .then(this.setState({ contactListRefreshingSpinner: false }));
     }
     renderSelectedPersonString() {
         const name = this.state.selectedPerson.name ? this.state.selectedPerson.name : '-';
@@ -98,11 +101,18 @@ class AddReservationModal extends Component {
                                 onChangeText={(e) => this.onInputChange(e)}
                                 placeholder='Ara' 
                             />
-                            <ModalContactList contactList={this.state.filteredContactList || this.props.contactList} selectPerson={(selectedPerson) => this.selectPerson(selectedPerson)} />
+                            <ModalContactList 
+                                contactList={this.state.filteredContactList || this.props.contactList} 
+                                selectPerson={(selectedPerson) => this.selectPerson(selectedPerson)} 
+                            />
                             <View style={styles.buttonsContainer}>
                                 <RowAroundContainer>
                                     <StandartButton type='confirm' onPress={this.handleConfirmPress.bind(this)}><Text>Ekle</Text></StandartButton>
-                                    <StandartButton type='primary' onPress={this.refreshContactList.bind(this)}><Text>Listeyi Güncelle</Text></StandartButton>
+                                    <StandartButton type='primary' onPress={this.refreshContactList.bind(this)}>
+                                        <Text>
+                                        {this.state.contactListRefreshingSpinner ? 'Güncelleniyor...' : 'Listeyi Güncelle'}
+                                        </Text>
+                                    </StandartButton>
                                     <StandartButton type='cancel' onPress={closeModal}><Text>İptal</Text></StandartButton>
                                 </RowAroundContainer>
                             </View>

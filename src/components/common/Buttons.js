@@ -18,7 +18,7 @@ export const StandartButton = (props) => {
     const { standartButton } = styles;
     const fontBgColor = createButtonBgColor(props.type);
     return (
-        <TouchableOpacity onPress={props.onPress} style={[standartButton, {backgroundColor: fontBgColor}]}>
+        <TouchableOpacity onPress={props.onPress} style={[standartButton, { backgroundColor: fontBgColor }]}>
             <ColoredButtonText>{props.children}</ColoredButtonText>
         </TouchableOpacity>
     );
