@@ -1,9 +1,12 @@
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
-import Login from '../screens/Login';
 import Index from '../screens/Index';
 import AddArea from '../screens/AddArea';
 import AreaDetail from '../screens/AreaDetail';
+
+import SignUp from '../screens/auth/Signup';
+import LogIn from '../screens/auth/LogIn';
+import SignOut from '../screens/auth/SignOut';
 
 export const LoggedIn = StackNavigator({
     Index: { 
@@ -27,11 +30,42 @@ export const LoggedIn = StackNavigator({
     }
     });
 
+    export const DrawNav = DrawerNavigator(
+    {
+        LoggedMain: {
+        path: '/',
+        screen: LoggedIn,
+        navigationOptions: {
+            drawerLabel: 'Main'
+        }
+        },
+        SignOut: {
+        path: '/sent',
+        screen: SignOut,
+        navigationOptions: {
+            drawerLabel: 'Sign Out'
+        }
+        },
+    },
+    {
+        initialRouteName: 'LoggedMain',
+        contentOptions: {
+        activeTintColor: '#e91e63',
+        },
+    }
+    );
+
     export const LoggedOut = StackNavigator({
-        Login: {
-            screen: Login,
+        LogIn: {
+            screen: LogIn,
             navigationOptions: {
-                title: 'Giriş'
+                title: 'Log In'
+            }
+        },
+        SignUp: {
+            screen: SignUp,
+            navigationOptions: {
+                title: 'Sign Up'
             }
         }
     });
@@ -40,10 +74,10 @@ export const LoggedIn = StackNavigator({
         return StackNavigator(
           {
             SignedIn: {
-              screen: LoggedIn,
-              navigationOptions: {
+                screen: DrawNav,
+                navigationOptions: {
                 gesturesEnabled: false
-              }
+                }
             },
             SignedOut: {
               screen: LoggedOut,
