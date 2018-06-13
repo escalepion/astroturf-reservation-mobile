@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Text, FlatList, View } from 'react-native';
+import { Text, FlatList, View, StyleSheet, ActivityIndicator } from 'react-native';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { getFullContacts } from '../../actions/contacts';
 import { fetchAreas } from '../../actions/areas';
 import ConfirmModal from '../common/ConfirmModal';
+import CenteredContainer from '../common/CenteredContainer';
 
 import MainContainer from '../common/MainContainer';
 import AreaItem from './AreaItem';
@@ -13,7 +14,6 @@ class Areas extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            areaList: [],
             deleteAreaId: undefined
         };
     }
@@ -23,9 +23,12 @@ class Areas extends Component {
     }
     onDeleteConfirm() {
         firebase.database().ref(`areas/${this.state.deleteAreaId}`)
+        .remove()
+        .then(() => {
+            firebase.database().ref(`reservations/${this.state.deleteAreaId}`)
             .remove();
-        firebase.database().ref(`reservations/${this.state.deleteAreaId}`)
-            .remove();
+        })
+        .then(() => this.setState({ deleteAreaId: undefined }));
     }
     closeModal() {
         this.setState({ deleteAreaId: undefined });
@@ -39,9 +42,16 @@ class Areas extends Component {
             />
         );
     }
-    render() {
-        if (this.props.areaList.length === 0) {
-            return <Text>Henüz saha girilmemiş. Bir tane ekleyerek başlayabilirsiniz.</Text>;
+    renderContent() {
+        if (this.props.areaListLoadingSpinner) {
+            return <CenteredContainer><ActivityIndicator size="large" color="#0000ff" /></CenteredContainer>;
+        } else if (this.props.areaList.length === 0) {
+            return (
+                    <CenteredContainer>
+                        <Text>Henüz saha girilmemiş.</Text>
+                        <Text>Bir tane girerek başlayabilirsiniz.</Text>
+                    </CenteredContainer>
+                    );
         }
         return (
             <MainContainer>
@@ -56,10 +66,26 @@ class Areas extends Component {
             </MainContainer>
         );
     }
+    render() {
+        return (
+            <View style={styles.container}>
+                {this.renderContent()}
+            </View>
+        );
+    }
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    }
+});
+
 const mapStateToProps = (state) => {
-    return { areaList: state.areas.areaList };
+    return {
+        areaList: state.areas.areaList,
+        areaListLoadingSpinner: state.areas.areaListLoadingSpinner
+    };
 };
 
 export default connect(mapStateToProps, { getFullContacts, fetchAreas })(Areas);

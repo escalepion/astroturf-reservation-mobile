@@ -8,9 +8,7 @@ class Index extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView>
-                    <Areas />
-                </ScrollView>
+                <Areas />
                 <IndexHeader />
             </View>
         );
