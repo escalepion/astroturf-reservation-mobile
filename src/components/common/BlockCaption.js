@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet } from 'react-native';
 
 const BlockCaption = (props) => {
-    const {container, containerText} = styles;
+    const { container, containerText } = styles;
     return (
         <View style={container}>
             <Text style={containerText}>{props.children}</Text> 
@@ -11,7 +11,7 @@ const BlockCaption = (props) => {
 };
 
 const styles = StyleSheet.create({
-    container : {
+    container: {
         alignItems: 'center',
         paddingTop: 20,
         paddingBottom: 20,

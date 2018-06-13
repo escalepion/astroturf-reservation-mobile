@@ -69,7 +69,7 @@ class AddReservationModal extends Component {
     renderSelectedPersonString() {
         const name = this.state.selectedPerson.name ? this.state.selectedPerson.name : '-';
         const number = this.state.selectedPerson.phoneNumbers ? this.state.selectedPerson.phoneNumbers[0].number : '-';
-        return `${name} (${number})`;
+        return { name, number };
     }
     render() {
         const { visible, closeModal } = this.props;
@@ -84,7 +84,12 @@ class AddReservationModal extends Component {
                 <View style={styles.container}>
                     <View style={styles.contentContainer}>
                         <View style={styles.content}>
-                            <BlockCaption>{this.state.selectedPerson ? this.renderSelectedPersonString() : 'Kişi seçiniz'}</BlockCaption>
+                            {
+                                this.state.selectedPerson ? <View style={styles.selectedPersonTextContainer}>
+                                    <Text>{this.renderSelectedPersonString().name}</Text>
+                                    <Text>({this.renderSelectedPersonString().number})</Text>
+                                </View> : <BlockCaption>Kişi seçiniz</BlockCaption>
+                            }
                             <SearchBar
                                 lightTheme
                                 showLoading
@@ -128,6 +133,11 @@ const styles = StyleSheet.create({
     buttonsContainer: {
         marginTop: 15,
         marginBottom: 15
+    },
+    selectedPersonTextContainer: {
+        alignItems: 'center',
+        paddingTop: 20,
+        paddingBottom: 20
     }
 });
 
