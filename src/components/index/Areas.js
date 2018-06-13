@@ -22,6 +22,8 @@ class Areas extends Component {
     onDeleteAreaClick(id) {
         firebase.database().ref(`areas/${id}`)
         .remove();
+        firebase.database().ref(`reservations/${id}`)
+        .remove();
     }
     renderAreaList() {
         return (
