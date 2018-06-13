@@ -5,10 +5,10 @@ import {
     FETCH_RESERVATIONS
 } from './types';
 
-export const fetchReservations = (date) => {
+export const fetchReservations = (areaId, date) => {
     return (dispatch) => {
         const dateRef = moment(date).format('DDMMYYYY');
-        firebase.database().ref(`reservations/${dateRef}`)
+        firebase.database().ref(`reservations/${areaId}/${dateRef}`)
             .on('value', snapshot => {
                 dispatch({ type: FETCH_RESERVATIONS, payload: snapshot.val() });
             });

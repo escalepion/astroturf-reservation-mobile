@@ -25,7 +25,7 @@ class Hours extends Component {
     onAddConfirm(number = '') {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
         const last10cars = this.setPhoneNumber(number);
-        firebase.database().ref(`reservations/${dateRef}`)
+        firebase.database().ref(`reservations/${this.props.areaInfo.id}/${dateRef}`)
             .update({ [this.state.selectedHour]: { id: last10cars } })
             .then(() => this.setState({ selectedHour: undefined }));
     }
@@ -70,7 +70,8 @@ class Hours extends Component {
                     onAddPress={() => this.onAddPress(index)}
                     onDeletePress={() => this.onDeletePress(index)}
                     person={this.props.reservationList && this.props.reservationList[index] && this.renderPerson(this.props.reservationList[index].id)}
-                    item={item} index={index}
+                    item={item} 
+                    index={index}
                     HoursMap={HoursMap}
                 />}
                 keyExtractor={(item, index) => index}

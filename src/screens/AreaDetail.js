@@ -16,8 +16,8 @@ class AreaDetail extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <DatePicker selectedDate={this.state.selectedDate} changeDate={(date) => this.changeDate(date)} />
-                <Hours selectedDate={this.state.selectedDate} />
+                <DatePicker areaInfo={this.props.navigation.state.params.item} selectedDate={this.state.selectedDate} changeDate={(date) => this.changeDate(date)} />
+                <Hours selectedDate={this.state.selectedDate} areaInfo={this.props.navigation.state.params.item} />
             </View>
         );
     }

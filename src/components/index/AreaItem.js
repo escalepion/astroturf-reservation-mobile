@@ -26,7 +26,7 @@ const AreaItem = ({ item, onDeleteAreaClick, navigation }) => {
                     <Text style={itemTitle}>{item.areaName}</Text>
                 </View>
                 <View style={itemContentGroup}>
-                    <Button title="Sahaya Git" onPress={() => { navigation.navigate('AreaDetail', item); }} />
+                    <Button title="Sahaya Git" onPress={() => { navigation.navigate('AreaDetail', { item }); }} />
                 </View>
                 <View style={itemContentGroup}>
                     <Button color='#D9534F' title="Sahayı Sil" onPress={onDeleteAreaClick} />

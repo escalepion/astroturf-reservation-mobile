@@ -16,20 +16,23 @@ class DatePicker extends Component {
         this.state = { isDateTimePickerVisible: false };
     }
     componentDidMount() {
-        this.props.fetchReservations(this.props.selectedDate);
+        this.fetchReservations();
     }
     onPreviousDateClick() {
         this.props.changeDate(this.props.selectedDate.subtract(1, 'days'));
-        this.props.fetchReservations(this.props.selectedDate);
+        this.fetchReservations();
     }
     onNextDateClick() {
         this.props.changeDate(this.props.selectedDate.add(1, 'days'));
-        this.props.fetchReservations(this.props.selectedDate);
+        this.fetchReservations();
     }
     handleDatePicked(date) {
         this.props.changeDate(moment(date));
         this.hideDateTimePicker();
-        this.props.fetchReservations(this.props.selectedDate);
+        this.fetchReservations();
+    }
+    fetchReservations() {
+        this.props.fetchReservations(this.props.areaInfo.id, this.props.selectedDate);
     }
     hideDateTimePicker() {
         this.setState({ isDateTimePickerVisible: false });
