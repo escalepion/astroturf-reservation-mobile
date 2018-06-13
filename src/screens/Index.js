@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import IndexHeader from '../components/index/IndexHeader';
 import Areas from '../components/index/Areas';
