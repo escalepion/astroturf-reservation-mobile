@@ -4,7 +4,7 @@ import { Modal, View, Text, StyleSheet } from 'react-native';
 import RowAroundContainer from '../common/RowAroundContainer';
 import { StandartButton } from '../common/Buttons';
 
-class DeleteReservationModal extends Component {
+class ConfirmModal extends Component {
     render() {
         const { visible, closeModal, onDeleteConfirm } = this.props;
         return (
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default DeleteReservationModal;
+export default ConfirmModal;

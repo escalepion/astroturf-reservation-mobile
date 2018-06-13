@@ -3,13 +3,12 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import firebase from 'firebase';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { ListItem } from 'react-native-elements';
+import ConfirmModal from '../common/ConfirmModal';
 
 import { HoursMap } from '../../data/Hours';
 
 import HourItem from './HourItem';
 import AddReservationModal from './AddReservationModal';
-import DeleteReservationModal from './DeleteReservationModal';
 
 class Hours extends Component {
     constructor(props) {
@@ -31,7 +30,7 @@ class Hours extends Component {
     }
     onDeleteConfirm() {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
-        firebase.database().ref(`reservations/${dateRef}/${this.state.selectedDeleteHour}`)
+        firebase.database().ref(`reservations/${this.props.areaInfo.id}/${dateRef}/${this.state.selectedDeleteHour}`)
             .remove()
             .then(() => this.setState({ selectedDeleteHour: undefined }));
     }
@@ -87,7 +86,7 @@ class Hours extends Component {
                     visible={this.state.selectedHour && true}
                     onAddConfirm={this.onAddConfirm.bind(this)}
                 /> : undefined}
-                {this.state.selectedDeleteHour >= 0 ? <DeleteReservationModal
+                {this.state.selectedDeleteHour >= 0 ? <ConfirmModal
                     closeModal={this.closeDeleteModal.bind(this)}
                     visible={this.state.selectedDeleteHour && true}
                     onDeleteConfirm={this.onDeleteConfirm.bind(this)}
