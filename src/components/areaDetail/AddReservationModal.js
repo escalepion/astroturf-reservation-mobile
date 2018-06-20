@@ -64,7 +64,7 @@ class AddReservationModal extends Component {
             // pageSize: 10,
             // pageOffset: 0,
         });
-        const dataRef = 'contactList';
+        const dataRef = `${firebase.auth().currentUser.uid}/contactList`;
         firebase.database().ref(dataRef)
         .update(contactList)
         .then(this.setState({ contactListRefreshingSpinner: false }));

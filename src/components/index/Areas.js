@@ -22,10 +22,10 @@ class Areas extends Component {
         this.props.getFullContacts();
     }
     onDeleteConfirm() {
-        firebase.database().ref(`areas/${this.state.deleteAreaId}`)
+        firebase.database().ref(`${firebase.auth().currentUser.uid}/areas/${this.state.deleteAreaId}`)
         .remove()
         .then(() => {
-            firebase.database().ref(`reservations/${this.state.deleteAreaId}`)
+            firebase.database().ref(`${firebase.auth().currentUser.uid}/reservations/${this.state.deleteAreaId}`)
             .remove();
         })
         .then(() => this.setState({ deleteAreaId: undefined }));

@@ -24,13 +24,13 @@ class Hours extends Component {
     onAddConfirm(number = '') {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
         const last10cars = this.setPhoneNumber(number);
-        firebase.database().ref(`reservations/${this.props.areaInfo.id}/${dateRef}`)
+        firebase.database().ref(`${firebase.auth().currentUser.uid}/reservations/${this.props.areaInfo.id}/${dateRef}`)
             .update({ [this.state.selectedHour]: { id: last10cars } })
             .then(() => this.setState({ selectedHour: undefined }));
     }
     onDeleteConfirm() {
         const dateRef = moment(this.props.selectedDate).format(this.state.dateRefFormat);
-        firebase.database().ref(`reservations/${this.props.areaInfo.id}/${dateRef}/${this.state.selectedDeleteHour}`)
+        firebase.database().ref(`${firebase.auth().currentUser.uid}/reservations/${this.props.areaInfo.id}/${dateRef}/${this.state.selectedDeleteHour}`)
             .remove()
             .then(() => this.setState({ selectedDeleteHour: undefined }));
     }

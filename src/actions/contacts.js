@@ -5,7 +5,7 @@ import {
 
 export const getFullContacts = () => {
     return (dispatch) => {
-        firebase.database().ref('contactList')
+        firebase.database().ref(`${firebase.auth().currentUser.uid}/contactList`)
             .on('value', snapshot => {
                 dispatch({ type: GET_FULL_CONTACT_LIST, payload: snapshot.val() });
             });

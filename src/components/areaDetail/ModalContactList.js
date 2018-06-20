@@ -6,7 +6,7 @@ import ContactListItem from './ContactListItem';
 
 class ModalContactList extends Component {
     componentDidMount() {
-        firebase.database().ref('contactList')
+        firebase.database().ref(`${firebase.auth().currentUser.uid}/contactList`)
             .on('value', snapshot => {
                 this.setState({ contactList: snapshot.val() });
             });

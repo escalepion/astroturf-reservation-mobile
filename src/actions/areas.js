@@ -8,7 +8,7 @@ import {
 export const fetchAreas = () => {
     return (dispatch) => {
         dispatch(setAreaLoadingSpinner(true));
-        firebase.database().ref('areas')
+        firebase.database().ref(`${firebase.auth().currentUser.uid}/areas`)
             .on('value', snapshot => {
                 let areaList = [];
                 if (snapshot.val()) {

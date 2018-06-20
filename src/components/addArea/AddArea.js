@@ -10,7 +10,7 @@ import MainContainer from '../common/MainContainer';
 
 class AddArea extends Component {
     handleFormSubmit(values) {
-        firebase.database().ref('areas')
+        firebase.database().ref(`${firebase.auth().currentUser.uid}/areas`)
         .push({ areaName: values.areaName })
         .then(() => { this.props.navigation.replace('Index'); });
     }

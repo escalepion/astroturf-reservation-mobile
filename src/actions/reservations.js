@@ -8,7 +8,7 @@ import {
 export const fetchReservations = (areaId, date) => {
     return (dispatch) => {
         const dateRef = moment(date).format('DDMMYYYY');
-        firebase.database().ref(`reservations/${areaId}/${dateRef}`)
+        firebase.database().ref(`${firebase.auth().currentUser.uid}/reservations/${areaId}/${dateRef}`)
             .on('value', snapshot => {
                 dispatch({ type: FETCH_RESERVATIONS, payload: snapshot.val() });
             });
