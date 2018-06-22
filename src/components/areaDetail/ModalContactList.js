@@ -20,6 +20,8 @@ class ModalContactList extends Component {
                     data={this.sortNames()}
                     renderItem={({ item, index }) => <ContactListItem onPress={() => this.props.selectPerson(item)} item={item} />}
                     keyExtractor={(item, index) => index}
+                    refreshing={this.props.contactListRefreshingSpinner}
+                    onRefresh={this.props.refreshContactList}
                 />
             );
         } else {

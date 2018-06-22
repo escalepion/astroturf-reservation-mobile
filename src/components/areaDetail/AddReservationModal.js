@@ -103,7 +103,9 @@ class AddReservationModal extends Component {
                             />
                             <ModalContactList 
                                 contactList={this.state.filteredContactList || this.props.contactList} 
-                                selectPerson={(selectedPerson) => this.selectPerson(selectedPerson)} 
+                                selectPerson={(selectedPerson) => this.selectPerson(selectedPerson)}
+                                contactListRefreshingSpinner={this.state.contactListRefreshingSpinner}
+                                refreshContactList={this.refreshContactList.bind(this)}
                             />
                             <View style={styles.buttonsContainer}>
                                 <RowAroundContainer>
