@@ -30,6 +30,9 @@ class Areas extends Component {
         })
         .then(() => this.setState({ deleteAreaId: undefined }));
     }
+    onRefresh() {
+        this.props.fetchAreas();
+    }
     closeModal() {
         this.setState({ deleteAreaId: undefined });
     }
@@ -39,6 +42,8 @@ class Areas extends Component {
                 data={this.props.areaList}
                 renderItem={({ item }) => <AreaItem onDeleteAreaClick={() => this.setState({ deleteAreaId: item.id })} item={item} />}
                 keyExtractor={item => item.id}
+                refreshing={this.props.areaListLoadingSpinner}
+                onRefresh={this.onRefresh.bind(this)}
             />
         );
     }
@@ -84,7 +89,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         areaList: state.areas.areaList,
-        areaListLoadingSpinner: state.areas.areaListLoadingSpinner
+        areaListLoadingSpinner: state.areas.areaListLoadingSpinner,
+        areasRefreshing: state.areas.areasRefreshing
     };
 };
 
